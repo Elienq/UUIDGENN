@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COURRS_UUID</title>
+</head>
+<body>
+    <center>
+            <h1>$ FALIXY UUID GENN $</h1>
+    <p>UUID Generator create by fullby</p>
+    <button id="generateButton">Generate UUID</button>
+    <p>make by fullby ></p>
+    <div id="uuidOutput"></div>
+
+    <script>
+        function generateUUID() {
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                var r = Math.random() * 16 | 0,
+                    v = c === 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+        }
+        document.getElementById('generateButton').addEventListener('click', function() {
+            var uuid = generateUUID();
+            document.getElementById('uuidOutput').textContent = uuid;
+        });
+    </script>
+    </center>
+</body>
+</html>
