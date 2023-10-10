@@ -1,31 +1,72 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
+    <link rel="stylesheet" href="css/style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>COURRS_UUID</title>
+    <title>FALIXY - Universally Unique Identifier</title>
 </head>
 <body>
     <center>
             <h1>$ FALIXY UUID GENN $</h1>
-    <p>UUID Generator create by fullby</p>
-    <button id="generateButton">Generate UUID</button>
-    <p>make by fullby ></p>
-    <div id="uuidOutput"></div>
+    <p>generat count : <span id="counter">0</span></p>
+    <p>UUID : <span id="uuid"></span></p>
+    <div class="button_solid004">
+        <a onclick="generateUUID()">GENERAT UUID</a>
+      </div>
 
     <script>
+        let count = 0;
+
         function generateUUID() {
-            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-                var r = Math.random() * 16 | 0,
-                    v = c === 'x' ? r : (r & 0x3 | 0x8);
-                return v.toString(16);
-            });
+            // UUIDを生成するための関数（簡略化されたもの）
+            function generateRandomUUID() {
+                return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                    var r = Math.random() * 16 | 0,
+                        v = c == 'x' ? r : (r & 0x3 | 0x8);
+                    return v.toString(16);
+                });
+            }
+
+            // UUIDを生成
+            const newUUID = generateRandomUUID();
+
+            // カウンターを更新
+            count++;
+            document.getElementById('counter').textContent = count;
+
+            // 生成されたUUIDを表示
+            document.getElementById('uuid').textContent = newUUID;
         }
-        document.getElementById('generateButton').addEventListener('click', function() {
-            var uuid = generateUUID();
-            document.getElementById('uuidOutput').textContent = uuid;
-        });
     </script>
+     <h1>ファイルをリンクに変換する</h1>
+     <form action="#" method="post" enctype="multipart/form-data" id="fileUploadForm">
+         <input type="file" name="uploadedFile" id="fileInput">
+         <input type="button" value="ファイルをアップロード" onclick="uploadFile()">
+     </form>
+     <div id="linkContainer"></div>
+ 
+     <script>
+         function uploadFile() {
+             const fileInput = document.getElementById('fileInput');
+             const linkContainer = document.getElementById('linkContainer');
+ 
+             if (fileInput.files.length === 0) {
+                 alert('ファイルを選択してください。');
+                 return;
+             }
+ 
+             const uploadedFile = fileInput.files[0];
+             const objectURL = URL.createObjectURL(uploadedFile);
+ 
+             const link = document.createElement('a');
+             link.href = objectURL;
+             link.textContent = 'Download Now';
+             linkContainer.innerHTML = '';
+             linkContainer.appendChild(link);
+         }
+     </script>
     </center>
+
 </body>
 </html>
